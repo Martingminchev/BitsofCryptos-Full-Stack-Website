@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL } from '../config.js';
 import {useNavigate , Link} from 'react-router-dom'
 
-const Register = (props) => {
+const Register = () => {
 	const [ form, setValues ] = useState({
 		email: '',
 		password: '',

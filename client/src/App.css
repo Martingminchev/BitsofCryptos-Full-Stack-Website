@@ -312,7 +312,7 @@ input:checked + .slider:before {
 }
 
 .form_container {
-  max-width: 300px;
+  max-width: 400px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -329,7 +329,7 @@ input:checked + .slider:before {
 
 .form_container input[type="email"],
 .form_container input[type="password"] {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -361,7 +361,6 @@ input:checked + .slider:before {
 }
 
 .welcome_message  {
-  color: #2e2e2e;
   font-size: 2em;
   text-align: center;
   margin-bottom: 0.5em;
@@ -372,7 +371,6 @@ input:checked + .slider:before {
 }
 
 .info_text {
-  color: #454545;
   font-size: 1em;
   text-align: center;
   margin-top: 0;

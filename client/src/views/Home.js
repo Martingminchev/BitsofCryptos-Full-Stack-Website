@@ -24,7 +24,7 @@ const Home = ({cryptos}) => {
       <p className="crypto-name">Name:</p>
       <p className="crypto-price">Price:</p>
       <p className="crypto-percent-24hours">24h%</p>
-      <p className="crypto-supply">Total market cap:</p>
+      <p className="crypto-supply">Circulating supply:</p>
       <p className="crypto-market-cap">Market Cap:</p>
     </div>
   {mapCryptos()}
