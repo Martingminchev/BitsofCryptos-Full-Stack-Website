@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { URL } from "../config.js";
-import { useNavigate } from "react-router-dom";
-// import jwt from 'jsonwebtoken'
-// react-scripts from version 5 shipped with react 18 is not supporting jsonwebtoken so we need to use alternative like jose to decode the JWT token in the client
+import { useNavigate, Link} from "react-router-dom";
 import * as jose from "jose";
 
 const Login = (props) => {
@@ -21,7 +19,6 @@ const Login = (props) => {
   };
 
   const handleSubmit = async (e) => {
-    debugger;
     e.preventDefault();
     try {
       const response = await axios.post(`${URL}/users/login`, {
@@ -46,21 +43,34 @@ const Login = (props) => {
       console.log(error);
     }
   };
-  return (
+  return (<div>
+    <h1 className="welcome_message">Welcome Back to BitsOfCoins!</h1>
+    <p className="info_text">
+Join our community and start exploring the exciting world of cryptocurrency.
+</p>
+<p className="info_text">
+Enter your credentials below to continue your journey with us.
+ Discover the latest in cryptocurrency, manage your portfolio, and stay ahead in the world of digital finance.
+</p>
     <form
       onSubmit={handleSubmit}
       onChange={handleChange}
       className="form_container"
     >
       <label>Email</label>
-      <input name="email" />
+      <input name="email" type="email" />
       <label>Password</label>
-      <input name="password" />
+      <input name="password" type="password" />
       <button>login</button>
       <div className="message">
         <h4>{message}</h4>
       </div>
     </form>
+<p>Not a member yet?
+  <Link to={`/register`} >
+  <span className="link_to_register"> Register now</span>
+            </Link> </p>
+    </div>
   );
 };
 

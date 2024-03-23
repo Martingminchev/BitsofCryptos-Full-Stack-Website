@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { URL } from '../config.js';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate , Link} from 'react-router-dom'
 
 const Register = (props) => {
 	const [ form, setValues ] = useState({
@@ -38,22 +38,34 @@ const Register = (props) => {
 		}
 	};
 
-	return (
+	return (<div>
+		<h1 className="welcome_message">Welcome to BitsOfCoins!</h1>
+    <p className="info_text">
+Join our community and start exploring the exciting world of cryptocurrency.
+</p>
+<p className="info_text">
+Register now to unlock all the features and stay updated with the latest trends in the digital currency space.
+</p>
 		<form onSubmit={handleSubmit} onChange={handleChange} className="form_container">
 			<label>Email</label>
-			<input name="email" />
+			<input name="email" type='email'/>
 
 			<label>Password</label>
-			<input name="password" />
+			<input name="password" type='password' />
 
 			<label>Repeat password</label>
-			<input name="password2" />
+			<input name="password2" type='password' />
 
 			<button>register</button>
 			<div className="message">
 				<h4>{message}</h4>
 			</div>
 		</form>
+		<p>Already a member?
+  <Link to={`/login`} >
+  <span className="link_to_register"> Log in now</span>
+            </Link></p>
+		</div>
 	);
 };
 

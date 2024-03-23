@@ -54,6 +54,7 @@ function App() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
+    setUser(null)
   };
 
 
@@ -105,7 +106,7 @@ function App() {
     <div className={`App-${mode}`}>
        <Router>
       <Header totalMarketCap={totalMarketCap} bitcoinDominance={bitcoinDominance}
-      mode={mode} toggleMode={toggleMode}  />
+      mode={mode} toggleMode={toggleMode} logout={logout} user={user}   />
         <Routes>
           <Route path="/" element={<Home cryptos={cryptos} />} />
           
@@ -132,14 +133,14 @@ function App() {
           path="/blog"
           element={
             !isLoggedIn ? (
-              <Navigate to="/" />
+              <Navigate to="/login" />
             ) : (
-              <Education logout={logout} user={user} />
+              <Education />
             )
           }
         />
         </Routes>
-    
+    <Footer/>
     </Router>
 
       

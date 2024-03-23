@@ -1,10 +1,15 @@
 import React, {useState } from 'react'
 import NewsFeed from './NewsFeed'
-import {Link} from 'react-router-dom'
+import {useNavigate,Link} from 'react-router-dom'
 
 const Header=(params)=>{
+  let navigate = useNavigate();
   const [hidden,setHidden]= useState("global-market-cap-container-visible")
   const[hide,setHide]= useState("hide ↑")
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
 
   const handleOnclick=()=>{
     if( hidden=="global-market-cap-container-visible"){
@@ -16,6 +21,43 @@ const Header=(params)=>{
       setHide('hide ↑')
     }
   }
+
+    const renderButtons=()=>!params.user?<>    
+    <div className='menu-item'>
+      <Link to={`/blog`}  >
+    Blog
+      </Link></div>
+  
+    <div className='menu-item'>
+      <Link to={`/register`}  >
+    register
+      </Link></div>
+
+    <div className='menu-item'>
+      <Link to={`/login`}  >
+    login
+      </Link>
+      </div></>
+      :<>
+      <div className='menu-item'>
+        <div className='user-icon' onClick={toggleDropdown}>
+          <p>{params.user.email.charAt(0).toUpperCase()}</p>
+        </div>
+        {dropdownVisible && (
+          <div className='dropdown-menu'>
+            <div className='user-name'>{params.user.email}</div>
+            <button className='dropdown-item'>Watchlist</button>
+            <button className='dropdown-item' onClick={() => {
+              params.logout();
+              navigate("/");
+            }}>Logout</button>
+          </div>
+        )}
+      </div>
+      </>
+
+    
+
   return <header>
       <menu>
         
@@ -38,16 +80,7 @@ const Header=(params)=>{
         </label>
         <span className={`toggle-label ${params.mode === 'dark' ? 'active' : ''}`}>Dark</span>
       </div>
-      
-          <div className='menu-item'><Link to={`/blog`}  >
-          Blog
-            </Link></div>
-          <div className='menu-item'><Link to={`/register`}  >
-          register
-            </Link></div>
-          <div className='menu-item'><Link to={`/login`}  >
-          login
-            </Link></div>
+     {renderButtons()}
           
         </div>
         </menu>

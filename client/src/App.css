@@ -104,6 +104,7 @@
 .menu-item{
   margin:5px;
   height: 35px;
+  cursor: pointer;
 }
 .menu-item a{
   text-decoration: none;
@@ -309,6 +310,158 @@ input:checked + .slider:before {
 .hide-expand-button:hover {
     background-color: #ccc;
 }
+
+.form_container {
+  max-width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background: #f9f9f9;
+}
+
+.form_container label {
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+.form_container input[type="email"],
+.form_container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.form_container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #5c6bc0;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.form_container button:hover {
+  background-color: #3f51b5;
+}
+
+.form_container .message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form_container .message h4 {
+  color: #4caf50;
+}
+
+.welcome_message  {
+  color: #2e2e2e;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  margin-top: 2em;
+  max-width: 30%;
+  margin: auto;
+}
+
+.info_text {
+  color: #454545;
+  font-size: 1em;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.5;
+  max-width: 30%;
+  margin: auto;
+}
+
+.link_to_register{
+  font-size: large;
+}
+
+
+footer {
+  font-size: 0.8em;
+  text-align: center;
+  padding: 20px 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  margin-bottom: 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-disclaimer,
+.footer-credits {
+  margin-bottom: 10px;
+}
+
+.footer-disclaimer p,
+.footer-credits p {
+  margin: 0;
+  padding: 0;
+}
+
+
+.user-icon {
+  background-color: rgba(49, 49, 255, 0.793);
+  color: white;
+  padding: 10px;
+  width: 2vw;
+  height: 4vh;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu .dropdown-item {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.menu-item:hover .dropdown-menu {
+  display: block;
+  text-align: center;
+}
+
+.user-icon p{
+margin: auto;
+font-size: larger;
+}
+
+
+
+
 
 
 

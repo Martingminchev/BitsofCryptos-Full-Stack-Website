@@ -13,7 +13,6 @@ const CoinInfo = ({cryptos}) => {
   );
   const [historicalData, setHistoricalData] = useState([]);
   const [currentCoin, setCurrentCoin] = useState(cryptos.find((singleCoin) => singleCoin.id === coin));
-console.log (currentCoin)
 
 useEffect(() => {
   if (!initialPrice &&!currentCoin) {
