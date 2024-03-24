@@ -4,8 +4,8 @@ import {useNavigate,Link} from 'react-router-dom'
 
 const Header=(params)=>{
   let navigate = useNavigate();
-  const [hidden,setHidden]= useState("global-market-cap-container-visible")
-  const[hide,setHide]= useState("hide ↑")
+  const [hidden,setHidden]= useState("global-market-cap-container-visible");
+  const[hide,setHide]= useState("hide ↑");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -20,13 +20,15 @@ const Header=(params)=>{
       setHidden("global-market-cap-container-visible")
       setHide('hide ↑')
     }
-  }
+  };
 
     const renderButtons=()=>!params.user?<>    
     <div className='menu-item'>
+      
       <Link to={`/blog`}  >
-    Blog
-      </Link></div>
+       Blog
+      </Link>
+    </div>
   
     <div className='menu-item'>
       <Link to={`/register`}  >
@@ -39,23 +41,31 @@ const Header=(params)=>{
       </Link>
       </div></>
       :<>
+      
       <div className='menu-item'>
+      
         <div className='user-icon' onClick={toggleDropdown}>
           <p>{params.user.email.charAt(0).toUpperCase()}</p>
         </div>
         {dropdownVisible && (
           <div className='dropdown-menu'>
             <div className='user-name'>{params.user.email}</div>
-            <button className='dropdown-item'>Watchlist</button>
+            <button className='dropdown-item'onClick={() => {
+              navigate("/watchlist");
+            }}>Watchlist</button>
+            <button className='dropdown-item'onClick={() => {
+              navigate("/blog");
+            }}>Blog</button>
             <button className='dropdown-item' onClick={() => {
               params.logout();
               navigate("/");
             }}>Logout</button>
           </div>
         )}
+        
       </div>
+      
       </>
-
     
 
   return <header>

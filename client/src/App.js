@@ -9,6 +9,7 @@ import Education from './views/Education.js'
 import LogIn from './views/LogIn.js'
 import Register from './views/Register.js'
 import Footer from './components/Footer.js'
+import Watchlist from './views/Watchlist.js'
 import { URL } from "./config.js";
 import * as jose from "jose";
 
@@ -101,7 +102,6 @@ function App() {
   const toggleMode = () => {
     setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
   };
-
   return (
     <div className={`App-${mode}`}>
        <Router>
@@ -112,7 +112,7 @@ function App() {
           
           <Route
             path="/CoinInfo/:coin"
-            element={<CoinInfo cryptos={cryptos} />}
+            element={<CoinInfo cryptos={cryptos} user={user} />}
             />
             <Route
           path="/register"
@@ -132,10 +132,20 @@ function App() {
         <Route
           path="/blog"
           element={
-            !isLoggedIn ? (
+            isLoggedIn==false ? (
               <Navigate to="/login" />
             ) : (
               <Education />
+            )
+          }
+        />
+        <Route
+          path="/watchlist"
+          element={
+            isLoggedIn==false ? (
+              <Navigate to="/login" />
+            ) : (
+              <Watchlist user={user} />
             )
           }
         />

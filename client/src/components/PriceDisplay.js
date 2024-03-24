@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PriceDisplay = ({ coin, coinPrice, initialPrice }) => {
+const PriceDisplay = ({ coinPrice, initialPrice }) => {
   const formatter = new Intl.NumberFormat('en-US');
 
   const renderPrice = () => {

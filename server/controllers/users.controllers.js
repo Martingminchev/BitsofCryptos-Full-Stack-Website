@@ -65,7 +65,7 @@ const login = async (req, res) => {
         expiresIn:'365d',
       }); //{expiresIn:'365d'}
       // after we send the payload to the client you can see how to get it in the client's Login component inside handleSubmit function
-      res.json({ ok: true, message: "welcome back", token, user });
+      res.json({ ok: true, message: "Successfully logged in.", token, user });
     } else return res.json({ ok: false, message: "Invalid data provided" });
   } catch (error) {
     res.json({ ok: false, error });
@@ -82,4 +82,83 @@ const verify_token = (req, res) => {
   });
 };
 
-module.exports = { register, login, verify_token };
+const add_to_watchlist = async (req, res) => {
+  const { email, item } = req.body; 
+  if (!email || !item) {
+    return res.json({ ok: false, message: "All fields are required" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.json({ ok: false, message: "Invalid user provided" });
+
+    if(!user.watchlist.includes(item)){
+    user.watchlist.push(item);
+    await user.save();
+
+    res.json({ ok: true, message: `${item} added to watchlist` , watchlist: user.watchlist });}
+
+     else if(user.watchlist.includes(item)){
+      res.json({ ok: true, message: `${item} already exists in your watchlist`, watchlist: user.watchlist });}
+     }
+
+
+   catch (error) {
+    console.log(error);
+    res.json({ ok: false, error });
+  }
+};
+
+const remove_from_watchlist = async (req, res) => {
+  const { email, item } = req.body; 
+  if (!email || !item) {
+    return res.json({ ok: false, message: "All fields are required" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.json({ ok: false, message: "Invalid user provided" });
+
+    if(user.watchlist.includes(item)){
+      const index = user.watchlist.indexOf(item);
+      user.watchlist.splice(index, 1);
+      await user.save();
+
+      res.json({ ok: true, message: `${item} removed from watchlist` , watchlist: user.watchlist });
+    }
+
+    else if(!user.watchlist.includes(item)){
+      res.json({ ok: true, message: `${item} is not on your watchlist.`, watchlist: user.watchlist });
+    }
+  }
+
+  catch (error) {
+    console.log(error);
+    res.json({ ok: false, error });
+  }
+};
+
+
+const get_watchlist = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.json({ ok: false, message: "Email is required" });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.json({ ok: false, message: "Invalid user provided" });
+
+    res.json({ ok: true, message: "Watchlist fetched successfully", watchlist: user.watchlist });
+  } catch (error) {
+    console.log(error);
+    res.json({ ok: false, error });
+  }
+};
+
+
+module.exports = { register, login, verify_token, add_to_watchlist, remove_from_watchlist, get_watchlist };

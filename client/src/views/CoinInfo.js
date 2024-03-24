@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PriceDisplay from '../components/PriceDisplay';
-import InvestmentAdvice from '../components/InvestmentAdvice';
 import CoinChart from '../components/CoinChart';
 
-const CoinInfo = ({cryptos}) => {
+const CoinInfo = ({cryptos, user}) => {
   const { coin } = useParams();
   const [coinPrice, setCoinPrice] = useState();
   const [initialPrice, setInitialPrice] = useState(
@@ -76,20 +75,46 @@ useEffect(() => {
     };
   }, [coin]);
 
+
+  const addToWatchlist = async () => {
+    
+    try {
+      const response = await axios.post('http://localhost:4040/users/add_to_watchlist', {
+        email: user.email, 
+        item: currentCoin?.id ? currentCoin.id : coin,
+      });
+      if (response.data.ok) {
+        alert(response.data.message);
+      } else {
+        alert('Failed to add to watchlist: ' + response.data.message);
+      }
+    } catch (error) {
+      console.error('Error adding to watchlist:', error);
+    }
+  };
   return (
     <div>
       <div className='coin-data'>
       <div className='vertical-coin-data'>
       <h2> {currentCoin?.name ? currentCoin.name : coin}</h2>
       <h1>$<PriceDisplay  coinPrice={coinPrice} initialPrice={initialPrice} /></h1>
-      <button>Add to watchlist</button>
+      <button onClick={addToWatchlist}>Add to watchlist</button>
 
       </div>
       <div className='chart'>
       <CoinChart historicalData={historicalData} />
       </div>
       </div>
-      <InvestmentAdvice historicalData={historicalData} />
+      {currentCoin && (
+  <>
+    <h1>{currentCoin.name} Price Live Data</h1>
+    <p className='current-coin-info'>The current price of {currentCoin.name} is {Number(initialPrice).toFixed(2)} with a 24-hour trading volume of ${Number(currentCoin.volumeUsd24Hr).toFixed(0)}$.
+    We update our {currentCoin.symbol} to USD price in real-time. {currentCoin.name}'s price is {currentCoin.changePercent24Hr>0?'up':'down'}  {Number(currentCoin.changePercent24Hr).toFixed(0)}% in the last 24 hours.
+    The current ranking for {currentCoin.name} is #{currentCoin.rank}, with a live market cap of ${Number(currentCoin.marketCapUsd).toFixed(0)} USD. 
+    It has a circulating supply of {Number(currentCoin.supply).toFixed(0)} BTC coins and a max. supply of {Number(currentCoin.maxSupply).toFixed(0)} {currentCoin.symbol} coins.
+ </p>
+  </>
+)}
       
     </div>
   );
