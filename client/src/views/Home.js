@@ -6,7 +6,7 @@ const Home = ({cryptos}) => {
   const formatter = new Intl.NumberFormat('en-US');
 
   const mapCryptos=()=>(cryptos.map((ele) => (
-      <Link to={`/CoinInfo/${ele.id}`} className="crypto" >
+      <Link to={`/CoinInfo/${ele.id}`} className="crypto" key={ele.id}>
       
       <p className="crypto-rank">{ele.rank}</p>
       <p className="crypto-name">{ele.name} <span className='crypto-symbol'>{ele.symbol}</span></p>

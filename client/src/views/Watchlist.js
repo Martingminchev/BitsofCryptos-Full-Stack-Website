@@ -2,13 +2,13 @@ import React, { useState, useEffect} from "react";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import * as jose from "jose";
-
-const URL = 'http://localhost:4040';
+import { URL } from "../config.js";
 
 const Watchlist = ({ user: initialUser }) => {
   const [user, setUser] = useState(initialUser);
   const [userWatchlist, setUserWatchlist] = useState([]);
   const [token, setToken] = useState(() => JSON.parse(localStorage.getItem("token")));
+
 
   useEffect(() => {
     const getWatchlist = async () => {
@@ -29,25 +29,18 @@ const Watchlist = ({ user: initialUser }) => {
     if (user && user.email) {
       getWatchlist();
     }
+
+    if(!user ){
+       let decodedToken = jose.decodeJwt(token);
+    let userEmail = {
+      email: decodedToken.userEmail,
+    }
+    setUser(userEmail)
+    getWatchlist()
+    }
   }, [user]);
 
-  useEffect(() => {
-    const verifyToken = async () => {
-      try {
-        if (token) {
-          axios.defaults.headers.common["Authorization"] = token;
-          const response = await axios.post(`${URL}/users/verify_token`);
-          if (response.data.ok) {
-            login(token);
-          } 
-        }
-      } catch (error) {
-        console.error('Error verifying token:', error);
-      }
-    };
-
-    verifyToken();
-  }, [token]);
+ 
 
   const removeItem = async (item) => {
     try {
@@ -66,14 +59,6 @@ const Watchlist = ({ user: initialUser }) => {
     }
   }
 
-  const login = (newToken) => {
-    const decodedToken = jose.decodeJwt(newToken);
-    const user = {
-      email: decodedToken.userEmail,
-    };
-    localStorage.setItem("token", JSON.stringify(newToken));
-    setUser(user);
-  };
 
 
 const renderWatchlist = () => {

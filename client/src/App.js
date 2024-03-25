@@ -41,8 +41,6 @@ function App() {
 
   const login = (token) => {
     let decodedToken = jose.decodeJwt(token);
-    console.log(decodedToken);
-    // composing a user object based on what data we included in our token (login controller - jwt.sign() first argument)
     let user = {
       email: decodedToken.userEmail,
     };
