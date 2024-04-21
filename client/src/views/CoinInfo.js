@@ -108,7 +108,7 @@ useEffect(() => {
       {currentCoin && (
   <>
     <h1>{currentCoin.name} Price Live Data</h1>
-    <p className='current-coin-info'>The current price of {currentCoin.name} is {Number(initialPrice).toFixed(2)} with a 24-hour trading volume of ${Number(currentCoin.volumeUsd24Hr).toFixed(0)}$.
+    <p className='current-coin-info'>The current price of {currentCoin.name} is ${Number(initialPrice).toFixed(2)} with a 24-hour trading volume of ${Number(currentCoin.volumeUsd24Hr).toFixed(0)}$.
     We update our {currentCoin.symbol} to USD price in real-time. {currentCoin.name}'s price is {currentCoin.changePercent24Hr>0?'up':'down'}  {Number(currentCoin.changePercent24Hr).toFixed(0)}% in the last 24 hours.
     The current ranking for {currentCoin.name} is #{currentCoin.rank}, with a live market cap of ${Number(currentCoin.marketCapUsd).toFixed(0)} USD. 
     It has a circulating supply of {Number(currentCoin.supply).toFixed(0)} BTC coins and a max. supply of {Number(currentCoin.maxSupply).toFixed(0)==0?'unknown':Number(currentCoin.maxSupply).toFixed(0)} {currentCoin.symbol} coins.
