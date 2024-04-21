@@ -1,3 +1,3 @@
-const URL = `https://radiant-ocean-97481-b71ccd8dc370.herokuapp.com`;
+const URL = `https://radiant-inlet-70222-ca1099a06113.herokuapp.com`;
 
 export  { URL };

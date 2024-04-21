@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PriceDisplay from '../components/PriceDisplay';
 import CoinChart from '../components/CoinChart';
+import { URL } from "../config.js";
 
 const CoinInfo = ({cryptos, user}) => {
   const { coin } = useParams();
@@ -79,7 +80,7 @@ useEffect(() => {
   const addToWatchlist = async () => {
     
     try {
-      const response = await axios.post('http://localhost:4040/users/add_to_watchlist', {
+      const response = await axios.post(`${URL}/users/add_to_watchlist`, {
         email: user.email, 
         item: currentCoin?.id ? currentCoin.id : coin,
       });
