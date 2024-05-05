@@ -39,7 +39,7 @@ const Register = () => {
 	};
 
 	return (<div>
-		<h1 className="welcome_message">Welcome to BitsOfCoins!</h1>
+		<h1 className="welcome_message">Welcome to BitsOfCryptos!</h1>
     <p className="info_text">
 Join our community and start exploring the exciting world of cryptocurrency.
 </p>

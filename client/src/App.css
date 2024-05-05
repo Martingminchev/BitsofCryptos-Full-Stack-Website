@@ -459,11 +459,11 @@ hr {
   cursor: pointer;
 }
 
-.dropdown-menu .dropdown-item:hover {
+.dropdown-menu .dropdown-item {
   background-color: #f1f1f1;
 }
 
-.menu-item:hover .dropdown-menu {
+.menu-item .dropdown-menu {
   display: block;
   text-align: center;
 }
